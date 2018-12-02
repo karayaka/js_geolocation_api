@@ -1,0 +1,81 @@
+     <link rel="stylesheet" href="{% static 'css/messages.css' %}" >
+
+     <section>
+     <div class="container"    >
+         <div  class="row">
+             <div class="col-md-12 "  >
+                  {% if messages %}
+
+
+                                 {% for message in messages %}
+                                     <div class="alert">
+                      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                      <strong>Danger!</strong> {{ message}}
+                    </div>
+
+
+                                 {% endfor %}
+
+                             {% endif %}
+
+                          <div class="col-md-12 " style="min-height: 850px;">
+                                   <div>
+                              <form class="form-control  " action="{% url 'subeEkle:sube_ekle' %}" enctype="multipart/form-data" method="post">
+                                {% csrf_token %}
+                                {% include 'form_teplate.html' %}
+                                  <div id="us2" style="width: 100%; height: 400px;"></div>
+                                  <br>
+                                <input type="submit" value="ekle" class="btn btn-success">
+                            </form>
+
+                                </div>
+                                 <script src="{% static 'js/jquery.min.js' %}"></script>
+
+                            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR GOOGLE KEY"></script>
+
+                            <script src="{% static 'js/locationpicker.jquery.js' %}"></script>
+
+
+                              </div>
+             </div>
+         </div>
+     </div>
+</section>
+
+<script>
+
+
+ $('#us2').locationpicker({
+        location: {
+            latitude: 40.841739214959574,
+            longitude:31.16271612421872
+
+        },
+        radius: 0,
+        zoom:14,
+        inputBinding: {
+            latitudeInput: $('#id_kor_lat'),
+            longitudeInput: $('#id_kor_lon'),
+            radiusInput: $('#us2-radius'),
+            locationNameInput: $('#id_sube_adresi')
+        },
+        enableAutocomplete: true,
+        enableAutocompleteBlur: false,
+        autocompleteOptions: null,
+        addressFormat: 'street_address',
+        enableReverseGeocode: true,
+        draggable: true,
+        onchanged: function(currentLocation, radius, isMarkerDropped) {},
+        onlocationnotfound: function(locationName) {},
+        oninitialized: function (component) {},
+        // must be undefined to use the default gMaps marker
+        markerIcon: undefined,
+        markerDraggable: true,
+        markerVisible : true
+    });
+
+
+</script>
+
+
+
